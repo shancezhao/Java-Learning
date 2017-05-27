@@ -1,0 +1,66 @@
+
+package leetcode_412fizzbuzz;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author Shance
+ */
+public class Solution {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static List<String> fizzBuzz(int n) {
+        List <String> fb = new ArrayList<String>();
+       //Not Good Solution 
+//        for(int i = 1;i<=n;i++)
+//        {
+//            String temp="";
+//            for(int j =1;j<=n;j++)
+//            {
+//                if(i==3*j)
+//                {
+//                    temp="Fizz";
+//                    break;
+//                }
+//                else if(i==5*j)
+//                {
+//                    temp="Buzz";
+//                    break;
+//                }
+//                else if(i==15*j)
+//                {
+//                    temp="FizzBuzz";
+//                    break;
+//                }
+//                else if(i!=3*j||i!=5*j||i!=15*j)
+//                {
+//                    temp=String.valueOf(i);
+//                }
+//            }
+
+              //Better Solution
+            for(int i=1; i<=n;i++)
+            {
+                if(i%3==0&&i%5!=0)
+                {
+                     fb.add("Fizz");
+                }
+                else if(i%5==0&&i%3!=0)
+                {
+                     fb.add("Buzz");
+                }
+                    
+                else if(i%15==0)
+                {
+                    fb.add("FizzBuzz");
+                }
+                else fb.add(String.valueOf(i));
+            }
+        System.out.println(fb);
+        return fb;
+       }
+}
