@@ -1,0 +1,15 @@
+public int[] Solution(int[] nums, int target) {
+        int[] tar = new int[2];
+        for(int i=0; i<nums.length;i++)
+        {
+            for(int j=i+1;j<nums.length;j++)
+            {
+                if(target-nums[i]==nums[j])
+                {
+                    tar[0]=i;
+                    tar[1]=j;
+                }
+            }
+        }
+        return tar;
+    }
