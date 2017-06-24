@@ -1,0 +1,65 @@
+One of Pocket Gems's challenge : "log parser"
+
+static String Solution(String[] lines) {
+        String stDate = "";
+        String downDate = "";
+        String conDate = "";
+        String disDate = "";
+        int count = 0;
+        float sd = 0;
+        float con = 0;
+        int loc = 0;
+        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");
+
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i].contains("START")) {
+                stDate = lines[i].substring(lines[i].indexOf("-") + 1);
+                loc = stDate.indexOf(")");
+                stDate = stDate.substring(0, loc);
+            }
+            System.out.println("count "+count);
+            if (lines[i].contains(":: CONNECTED")) {
+                conDate = lines[i].substring(lines[i].indexOf("-") + 1);
+                loc = conDate.indexOf(")");
+                conDate = conDate.substring(0, loc);
+                count=0;
+            }
+            if (lines[i].contains("DISCONNECTED")) {
+                disDate = lines[i].substring(lines[i].indexOf("-") + 1);
+                loc = disDate.indexOf(")");
+                disDate = disDate.substring(0, loc);
+                count=1;
+            }
+
+            if (lines[i].contains("SHUTDOWN")) {
+                downDate = lines[i].substring(lines[i].indexOf("-") + 1);
+                loc = downDate.indexOf(")");
+                downDate = downDate.substring(0, loc);
+                count=-1;
+            }
+            try {
+                if (count == 1) {
+                    con = con+(formatter.parse(disDate).getTime() - formatter.parse(conDate).getTime()) / (1000 * 60);
+                } else if (count ==-1) {
+                    con = ((formatter.parse(downDate).getTime() - formatter.parse(conDate).getTime()) / (1000 * 60)) + con;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(PocketGems.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            sd = (formatter.parse(downDate).getTime() - formatter.parse(stDate).getTime()) / (1000 * 60);
+        } catch (ParseException ex) {
+            Logger.getLogger(PocketGems.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        float out = (con / sd) * 100;
+        String ret = out + "%";
+        System.out.print(ret);
+        return ret;
+    }
+    
+    public static void main(String[] args) {
+        String[] arr = {"(11/01/2015-04:00:00) :: START", "(11/01/2015-04:00:00) :: CONNECTED", "(11/01/2015-04:30:00) :: DISCONNECTED", "(11/01/2015-04:45:00) :: CONNECTED", "(11/01/2015-05:00:00) :: SHUTDOWN"};
+        String[] arr1 = {"(11/01/2015-04:00:00) :: START", "(11/01/2015-04:00:00) :: CONNECTED", "(11/01/2015-04:30:00) :: DISCONNECTED", "(11/01/2015-04:45:00) :: CONNECTED", "(11/01/2015-04:50:00) :: DISCONNECTED","(11/01/2015-05:00:00) :: CONNECTED","(11/01/2015-05:10:00) :: SHUTDOWN"};
+        Solution(arr);
+    }
