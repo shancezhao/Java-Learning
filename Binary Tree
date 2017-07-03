@@ -1,0 +1,20 @@
+二叉树Binary Tree
+
+二叉树的每个结点至多只有2棵子树（不存在度大于2的结点）。
+二叉树的第i层至多有2^(i-1)个结点；
+深度为k的二叉树至多有(2^k)-1个结点（i,k>=1；深度至多的是全部结点）。
+每一个顶点的度不大于3。对任何一棵二叉树T，如果其终端结点数为n_0，度为2的结点数为n_2，则n_0=n_2+1。
+
+一棵深度为k，且有2^k-1个结点的二叉树称为 满二叉树；
+完全二叉树：叶节点只能出现在最下层和次下层，并且最下面一层的结点都集中在该层最左边的若干位置的二叉树
+
+A rooted binary tree has a root node and every node has at most two children.
+A full binary tree (sometimes referred to as a proper or plane binary tree) is a tree in which every node in the tree has either 0 or 2 children.
+A perfect binary tree is a binary tree in which all interior nodes have two children and all leaves have the same depth or same level.[18] (This is ambiguously also called a complete binary tree.[19]) An example of a perfect binary tree is the ancestry chart of a person to a given depth, as each person has exactly two biological parents (one mother and one father)
+
+先序遍历：首先访问根，再先序遍历左(右)子树，最后先序遍历右(左)子树。
+中序遍历：首先中序遍历左(右)子树，再访问根，最后中序遍历右(左)子树。
+后序遍历：首先后序遍历左(右)子树，再后序遍历右(左)子树，最后访问根。
+层次遍历：即按照层次访问，通常用队列来做。访问根，访问子女，再访问子女的子女（越往后的层次越低）（2个子女的级别相同）。
+
+
